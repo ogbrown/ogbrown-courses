@@ -1,0 +1,27 @@
+<div th:fragment="body" th:remove="tag">
+		<div class="row mytopofpage">
+			<div class="alert alert-success">Class materials will be posted
+				to this site as the course progresses and a link will become active
+				under the appropriate session by the end of the day Friday after the
+				session/class completes. Please only share this information with other
+				enrolled class members.</div>
+		</div>
+
+	    <div th:each="courseSessionLink,iterStat : ${courseSessionLinks}" class="row">
+	    	<div  th:if="${iterStat.index == 1}" class="row">
+				<hr />
+				<h2>Not Posted Yet</h2>
+			</div>
+			<h3>
+				<a th:if="${iterStat.index == 0}" th:href="@{${courseSessionLink.urlSlug + '/'}}" th:title="${courseSessionLink.title}" th:text="${courseSessionLink.text}">LINK</a>
+				<p th:if="${iterStat.index > 0}" th:text="${courseSessionLink.text}">LINK</p>
+			</h3>
+		</div>
+		<div class="row">
+		<a class="btn btn-warning btn-lg" href="http://dev.ogbrown.com/account"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Enrolled Students<br />Sign-In</a>
+		
+		
+		</div>
+		
+
+</div>

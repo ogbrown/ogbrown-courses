@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="${page.metaDescription}" />
+    <meta name="keywords" content="${page.metaKeywords}" />
+    <meta name="author" content="" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <title th:text="${page.title}">Some Title</title>
+    <object th:replace="fragments/courses-head :: head" th:remove="tag" />
+	<object th:replace="fragments/courses-uniquehead :: head" th:remove="tag" />
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+    <div id="page" class="hfeed site">
+    <div th:replace="fragments/courses-masthead" th:remove="tag" ></div>
+
+    <header class="content-header">
+	<div class="container">
+		<h1 class="page-title" th:text="${page.contentHeader}">Main Heading</h1>
+	</div>
+	</header>
+	
+	<a id="pagetop"></a>
+
+	<div class="container">
+		<div class="row mytopofpage">
+			<a class="btn btn-warning btn-lg" href="http://dev.ogbrown.com/account"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Enrolled Students<br />Sign-In</a>
+		
+		
+		</div>
+	
+		<div class="row rowcontent">
+		<div th:replace="fragments/courses-default-list :: body" th:remove="tag">
+    		Body Text
+    	</div>
+    	</div>
+	</div>
+	<!-- .container -->
+    <div th:replace="fragments/courses-footer :: foot" th:remove="tag" ></div>
+    </div><!-- #page -->
+    <div th:replace="fragments/courses-footerjs :: foot" th:remove="tag" ></div>
+
+  </body>
+</html>

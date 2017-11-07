@@ -1,0 +1,155 @@
+/*
+Theme Name: DevOGB
+Description: SbOGB Child Theme
+Theme URI: http://www.sbogb.com
+Author: Solutions by O.G. Brown, LLC
+Author URI: http://www.sbogb.com
+Version: 0.1
+Template: flat-bootstrap
+License: Commercial
+License URI: http://www.sbogb.com/license
+Tags: one-column, right-sidebar, left-sidebar, fluid-layout, responsive-layout, custom-header, custom-menu, featured-images, featured-image-header, full-width-template, flexible-header, theme-options, sticky-post, threaded-comments, light, translation-ready, rtl-language-support, custom-background
+
+SbOGB Bootstrap Theme, Copyright (C) 2014 SbOGB.com
+SbOGB Bootstrap Theme is commercially licensed and built to work as a child theme to the Flat Bootstrap WordPress Theme v1.3 which is licensed under the GPL 3.0 by XtremelySocial.
+
+*/
+
+/*
+** THEME-SPECIFIC STYLES HERE TO OVERRIDE BOOTSTRAP, THEME-BASE, AND THEME-FLAT CSS
+*/
+
+body {
+    font: 18px/1.65em "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #333333;
+    background-color: #F2F2F2;
+}
+
+a {
+    color: #1685a0;
+}
+a:hover, a:focus {
+    color: #1998b7;
+}
+button, html input[type="button"], input[type="submit"] {
+    background-color: #1a9cbc;
+}
+button:hover, 
+button:focus,
+html input[type="button"]:hover, 
+html input[type="button"]:focus,
+input[type="submit"]:hover, 
+input[type="submit"]:focus {
+    background-color: #1685a0;
+    border-color: #1685a0;
+}
+/* Set page header to dark blue */
+.content-header {
+        background-color: #34495e;
+        color: #fff;
+}
+.content-header h1,
+.content-header h2,
+.content-header h3 {
+        color: #fff;
+}
+
+/* *** page content *** */
+.mytopofpage {
+        margin-top: 1em;
+}
+
+.rowcontent {
+        margin-left: 0px;
+        margin-right: 0px;
+}
+
+/* Set our footer to "almost" black */
+.sidebar-footer {
+        background-color: #2f2f2f;
+        color: white;
+}
+.sidebar-footer h1,
+.sidebar-footer h2,
+.sidebar-footer h3 {
+        color: #fff;
+}
+
+/* Set link colors to off white and text to gray for footer */
+.sidebar-footer,
+.footer-nav-menu {
+        color: #95a5a6;
+}
+.sidebar-footer a:not(.btn),
+.footer-nav-menu a:not(.btn) {
+        /*color: #95a5a6;*/
+        color: #f2f2f2;
+}
+.sidebar-footer a:hover:not(.btn),
+.sidebar-footer a:focus:not(.btn),
+.footer-nav-menu a:hover:not(.btn),
+.footer-nav-menu a:focus:not(.btn) {
+        /*color: #c0392b;*/
+        color: #3bc492;
+}
+
+.entry-meta,
+.comment-edit-link {
+        font-size: 16px;
+}
+
+/* Set our site credits to "not quite" black */
+.after-footer {
+        background: #222222;
+        color: white;
+        font-size: 16px;
+}
+
+/* Move up the edit link on single pages so it doesn't create an uncolored section
+ * Note that its parent must have relative positioning for this to work. Not used.
+ */
+/*.page .entry-content {
+        position: relative;
+}
+.page footer.entry-meta {
+        position: absolute;
+        bottom: 0;
+}*/
+
+
+/*
+ * STYLE SOME COMMON WORDPRESS WIDGETS AND PLUGINS
+ */
+
+form.contact-form textarea {
+        height: 108px;
+}
+
+/*
+ * Fix for .syntaxhighlighter bootstrap name collision
+ */
+
+.syntaxhighlighter table .container:before {
+    display: none !important;
+}
+.navbar-default {
+    border-color: #1998b7;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #1685a0;
+}
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+    color: #1998b7;
+}
+.course-list-row {
+	border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #AAAAAA;
+}
+.course-list-row td {
+	vertical-align: center;
+}
+.course-list-row td ul {
+	list-style: none;margin-top:10px;margin-bottom:0px;
+}
+.archived {
+	color: #aaa !important;
+}

@@ -1,0 +1,46 @@
+<div th:fragment="body" th:remove="tag">
+
+	<div class="row mytopofpage">
+		<h1 class="text-center">Collin College &#8211; Continuing Education</h1>
+	</div>
+	<div class="row">
+		<div class="col-md-3 text-right">
+			<h3>Course:</h3>
+		</div>
+		<div class="col-md-9 text-center">
+				<h2><strong th:text="${course.currentLabel + ': ' + course.title}">JAVA 6500: Java Programming I; CRN 77175</strong></h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 text-right">
+			<h3>Instructor:</h3>
+		</div>
+		<div class="col-md-9 text-center">
+			<h3><strong th:text="${instructor.nickname + ' ' + instructor.lastName}">O.G. Brown, III</strong></h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 text-right">
+			<h3>Phone:</h3>
+		</div>
+		<div class="col-md-9 text-center">
+			<h3><strong th:text="${instructor.phone}">(866) 220-7777</strong> <br /><span th:text="${instructor.phoneInstructions}">(day/evening hours, allow 24 hour response time)</span></h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 text-right">
+			<h3>E-mail:</h3>
+		</div>
+		<div class="col-md-9 text-center">
+			<h3><strong><a th:href="${'mailto:' + instructor.email}" th:text="${instructor.email}">education@ogbrown.com</a></strong><br /><span th:text="${instructor.emailInstructions}">(anytime, allow 24 hour response time)</span></h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 text-right">
+			<h3>Class Web Site:</h3>
+		</div>
+		<div class="col-md-9 text-center">
+			<h3><a th:href="${instructor.website}" href="http://dev.ogbrown.com/" title="Home"><strong  th:text="${instructor.website}">http://dev.ogbrown.com</strong></a></h3>
+		</div>
+	</div>
+</div>

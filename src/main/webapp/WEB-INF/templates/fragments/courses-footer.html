@@ -1,0 +1,54 @@
+<div th:fragment="foot" th:remove="tag">
+
+<footer id="colophon" class="site-footer" role="contentinfo">
+
+	<div class="after-footer">
+		<div class="container">
+			<div class="row">
+				<div class="footer-nav-menu pull-left">
+					<nav id="footer-navigation" class="secondary-navigation"
+						role="navigation">
+						<h1 class="menu-toggle sr-only">Footer Menu</h1>
+	
+						<div class="sample-menu-footer-container">
+							<ul id="sample-menu-footer" class="list-inline dividers">
+								<li id="menu-item-sample-1"
+									class="menu-item menu-item-type-custom menu-item-object-custom menu-item-sample-1"><a
+									class="smoothscroll" title="Back to top of page" href="#page"><span
+										class="fa fa-angle-up"></span> Top</a></li>
+								<li id="menu-item-sample-2"
+									class="menu-item menu-item-type-post_type menu-item-object-page menu-item-sample-2"><a
+									title="Home" href="/ogbrown-courses">Home</a></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+				<!-- .footer-nav-menu -->
+	<!--/* 			<div class="pull-right">
+					   <form name='f' th:action="@{'/login?logout'}" method='POST'>
+					      <input name="submit" type="submit" value="Logout" />
+					      <input type="hidden"  th:name="${_csrf.parameterName}"   th:value="${_csrf.token}"/>
+	                   </form>
+				</div>  */-->
+				<div id="site-credits" class="site-credits pull-right">
+					&copy; 2015-<span th:text="${T(java.time.Year).now().getValue()}" th:remove="tag">Current Year</span> <a href="http://www.ogbrown.com/" rel="author">O.G.
+						Brown, III</a>
+				</div>
+			</div>
+			<div class="row">
+			<p>Development Stack: Java Web Application built using  
+					<a href="http://spring.io/"	rel="platform" target="_blank">the Spring Tool Suite (Eclipse), Spring Framework 4, Spring Data JPA, Spring Web MVC, Spring Context</a>, Git, Maven, Logback, JUnit, Mockito, 
+					<a href="http://hibernate.org/orm/"	rel="platform" target="_blank">Hibernate ORM 5</a>, 
+					<a href="http://mysql.com/"	rel="platform" target="_blank">MySQL</a>, EHCache,
+					Jackson, Castor XML, Thymeleaf, JSPs, WebJars, Bootstrap, JQuery, HTML, CSS, and all running on Apache Tomcat 8+ and <a href="http://oracle.com" rel="platform" target="_blank">Java 8</a>.</p>
+			</div>
+			<!-- .site-credits -->
+
+		</div>
+		<!-- .container -->
+	</div>
+	<!-- .after-footer -->
+
+</footer>
+<!-- #colophon -->
+</div>

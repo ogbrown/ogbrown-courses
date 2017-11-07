@@ -1,0 +1,48 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<context:property-placeholder location="classpath:jdbc-local.properties"/>
+
+	<jpa:repositories base-package="com.ogbrown.devcourses.repository" />
+	
+	<beans:bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<beans:property name="driverClassName" value="${jdbc.driverClassName}" />
+        <beans:property name="url" value="${jdbc.url}" />
+        <beans:property name="username" value="${jdbc.username}" />
+        <beans:property name="password" value="${jdbc.password}" />
+    </beans:bean>
+<!--   <beans:property name="initialSize" value="${jdbctest.initialSize}" /> -->
+<!--   <beans:property name="maxActive" value="${jdbctest.maxActive}" /> -->
+	<beans:bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<beans:property name="dataSource" ref="dataSource"/>
+		<beans:property name="persistenceProviderClass" value="org.hibernate.jpa.HibernatePersistenceProvider"/>
+		<beans:property name="packagesToScan" value="com.ogbrown.devcourses.model" />
+		<beans:property name="jpaProperties">
+			<beans:props>
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQL57InnoDBDialect</beans:prop>
+				<beans:prop key="hibernate.show_sql">false</beans:prop>
+				<beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
+				<!-- Disable the second-level cache  -->
+<!--                 <beans:prop key="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</beans:prop> -->
+				<beans:prop key="hibernate.cache.use_second_level_cache">true</beans:prop>
+			    <beans:prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</beans:prop>
+                <beans:prop key="hibernate.enable_lazy_load_no_trans">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+    <tx:annotation-driven />
+    <beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <beans:property name="entityManagerFactory" ref="entityManagerFactory" />
+    </beans:bean>
+</beans:beans>

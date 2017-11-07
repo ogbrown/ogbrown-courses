@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+			<outputPatternAsHeader>true</outputPatternAsHeader>
+		</encoder>
+	</appender>
+	<logger name="com.ogbrown" level="DEBUG" />
+	<logger name="net.sf.ehcache" level="TRACE" />
+	<logger name="org.springframework.web" level="WARN" />
+	<logger name="org.springframework.security" level="WARN" />
+	<logger name="org.springframework" level="WARN" />
+	<logger name="org.apache" level="WARN" />
+	<logger name="org.exolab" level="WARN" />
+	<logger name="org.castor" level="WARN" />
+	<logger name="org.codehaus" level="WARN" />
+	<logger name="org.thymeleaf" level="WARN" />
+	<logger name="org.hibernate" additivity="false">
+		<level value="WARN" />
+	</logger>
+	<root>
+		<level value="WARN" />
+		<appender-ref ref="consoleAppender" />
+	</root>
+</configuration>

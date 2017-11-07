@@ -1,0 +1,8 @@
+<div th:fragment="body" th:remove="tag">
+
+	<div class="row mytopofpage">
+	    <div class="alert-info jumbotron" >
+			<div th:each="objective : ${course.courseObjectives}" th:utext="${objective.objective}">Beginning Java with Eclipse</div>
+		</div>
+	</div>
+</div>

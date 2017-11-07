@@ -1,0 +1,10 @@
+<div th:fragment="body" th:remove="tag">
+
+	<div class="row mytopofpage text-center">
+		<h1>Course Prerequisite(s):</h1>
+		<div class="alert-info jumbotron">
+		<h2>Any Programming Language Experience</h2>
+		<h2 th:each="prereq : ${course.prerequisites}" th:text="${prereq.title}"></h2>
+		</div>
+	</div>
+</div>

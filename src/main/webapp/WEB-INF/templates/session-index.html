@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="${page.metaDescription}"/>
+    <meta name="keywords" content="${page.metaKeywords}" />
+    <meta name="author" content="" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <title th:text="${page.title}">Some Title</title>
+    <object th:replace="fragments/courses-head :: head" th:remove="tag" />
+	<object th:replace="fragments/courses-uniquehead :: head" th:remove="tag" />
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+    <div id="page" class="hfeed site">
+    <div th:replace="fragments/courses-masthead" th:remove="tag" ></div>
+
+    <header class="content-header">
+	<div class="container">
+		<h1 class="page-title" th:text="${page.contentHeader}">Main Heading</h1>
+	</div>
+	</header>
+	
+	<a id="pagetop"></a>
+
+	<div class="container">
+    <div th:replace="fragments/course-session-default-body :: body" th:remove="tag" ></div>
+	</div>
+	<div class="container">
+		<nav role="navigation" id="subpage-navigation" class="page-navigation">
+			<h1 class="screen-reader-text sr-only">Page navigation</h1>
+			<ul class="pager" >
+				<li class="nav-up" th:if="${page.parentLink}"><a th:href="${page.parentLink.urlSlug}"
+					href="http://dev.ogbrown.com/java-programming-i/java-prog-i-session-1/" >
+					<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+					<span th:text="${page.parentLink.title}" th:remove="tag">&uarr; Java Prog I &#8211; Session 1</span></a>
+			 	</li>
+				<li class="nav-previous" th:if="${page.leftSiblingLink}"><a th:href="${page.leftSiblingLink.urlSlug}"
+				 	href="http://dev.ogbrown.com/java-programming-i/java-prog-i-session-1/java-prog-i-java-is-great/">
+				 	 <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+				 	 <span th:text="${page.leftSiblingLink.title}" th:remove="tag">Java
+						Prog I: Java Is Great &rarr;</span></a>
+				</li>
+				<li class="nav-next" th:if="${page.rightSiblingLink}"><a th:href="${page.rightSiblingLink.urlSlug}" 
+	   				href="http://dev.ogbrown.com/java-programming-ii/java-prog-ii-session-1/java2-welcome/java-prog-ii-course-objectives/">
+
+				 	 <span th:text="${page.rightSiblingLink.title}" th:remove="tag">
+					&larr; Java Prog II Course Objectives</span>
+					<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<!-- .container -->
+    <div th:replace="fragments/courses-footer :: foot" th:remove="tag" ></div>
+    </div><!-- #page -->
+    <div th:replace="fragments/courses-footerjs :: foot" th:remove="tag" ></div>
+
+  </body>
+</html>

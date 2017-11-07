@@ -1,0 +1,24 @@
+<div th:fragment="body" th:remove="tag">
+		<div class="row mytopofpage">
+			<div class="alert alert-success">Class materials will be posted to this site as the course progresses and links will become active under the appropriate session by the end of the day Friday.  Please only share this information with other enrolled class members.</div>
+			<div class="alert alert-info">All information provided here is supplemental information to your own notes taken during the instructor led lectures.  This site is a voluntary effort and the author hopes you find it useful to improve the accuracy of your own notes. Please take good notes.  Also please remember to bring your memory sticks and save your incremental work for your practice environment. More info? <a href="http://dev.ogbrown.com/privacy-policy/" target="_blank">See the terms of use.</a></div>
+
+		</div>
+		<div class="row">
+			<ol>	    
+				<li th:each="contentMenuItem : ${contentMenu}"><h3><a th:href="@{${contentMenuItem.urlSlug + '/'}}"
+						th:title="${contentMenuItem.title}" th:text="${contentMenuItem.contentHeader}">Content Menu Item</a></h3>
+				</li>
+	  		</ol>
+	  	</div>
+		<div class="row">
+		<a class="btn btn-warning btn-lg" href="http://dev.ogbrown.com/account"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Enrolled Students<br />Sign-In</a>
+		
+		
+		</div>
+		
+		<div  class="row">
+			<hr />
+			<h2>Not Posted Yet</h2>
+		</div>
+</div>

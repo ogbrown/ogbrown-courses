@@ -1,0 +1,63 @@
+<div th:fragment="foot" th:remove="tag">
+<div class="container">
+	<nav role="navigation" id="subpage-navigation" class="page-navigation">
+		<h1 class="screen-reader-text sr-only">Page navigation</h1>
+		<ul class="pager">
+			<li class="nav-up">
+			   <a th:href="${empty page.parentLink.urlSlug?@{'/ogbrown-courses'}:@{page.parentLink.urlSlug}/}" th:text="&uarr; ${page.parentLink.contentHeader}">UP</a>
+			</li>
+			<li th:if="${not empty page.leftSiblingLink}" class="nav-previous">
+			   <a th:href="${page.leftSiblingLink.urlSlug}" th:text="&larr; ${page.leftSiblingLink.contentHeader}">PREV</a>
+			</li>
+			<li th:if="${not empty page.rightSiblingLink}" class="nav-next">
+			   <a th:href="${page.rightSiblingLink.urlSlug}" th:text="${page.rightSiblingLink.contentHeader} &rarr;">NEXT</a>
+			</li>
+		</ul>
+	</nav>
+</div><!-- .container -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+
+	<div class="after-footer">
+		<div class="container">
+
+			<div class="footer-nav-menu pull-left">
+				<nav id="footer-navigation" class="secondary-navigation"
+					role="navigation">
+					<h1 class="menu-toggle sr-only">Footer Menu</h1>
+
+					<div class="sample-menu-footer-container">
+						<ul id="sample-menu-footer" class="list-inline dividers">
+							<li id="menu-item-sample-1"
+								class="menu-item menu-item-type-custom menu-item-object-custom menu-item-sample-1"><a
+								class="smoothscroll" title="Back to top of page" href="#page"><span
+									class="fa fa-angle-up"></span> Top</a></li>
+							<li id="menu-item-sample-2"
+								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-sample-2"><a
+								title="Home" th:href="@{'/ogbrown-courses'}">Home</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+			<!-- .footer-nav-menu -->
+<!--/* 			<div class="pull-right">
+				   <form name='f' th:action="@{'/login?logout'}" method='POST'>
+				      <input name="submit" type="submit" value="Logout" />
+				      <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+                   </form>
+			</div> */-->
+			<div id="site-credits" class="site-credits pull-right">
+				&copy; 2015-<span th:text="${T(java.time.Year).now().getValue()}" th:remove="tag">Current Year</span> <a href="http://www.sbogb.com/" rel="home">O.G.
+					Brown, III</a><br /> <a href="http://oracle.com" rel="platform" target="_blank">Java</a> Web Application built using ,<br />
+					<a href="http://spring.io/"	rel="platform" target="_blank">Spring</a>, <a href="http://hibernate.org/orm/"	rel="platform" target="_blank">Hibernate ORM</a>, and
+					<a href="http://mysql.com/"	rel="platform" target="_blank">MySQL</a>
+			</div>
+			<!-- .site-credits -->
+
+		</div>
+		<!-- .container -->
+	</div>
+	<!-- .after-footer -->
+
+</footer>
+<!-- #colophon -->
+</div>

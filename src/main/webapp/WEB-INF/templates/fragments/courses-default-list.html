@@ -1,0 +1,14 @@
+
+<div th:fragment="body" th:remove="tag">
+<table>
+    <tr th:each="course : ${courses}" class="course-list-row">
+      <td class="col-md-2">
+          <ul><li th:text="${(course.currentCourseOffering.end > #dates.createToday())?course.currentCourseOffering.start:'Planning'}" th:unless="${course.currentCourseOffering.courseOfferingStatus == T(com.ogbrown.devcourses.model.CourseOfferingStatus).ARCHIVED}"></li>
+      <li th:if="${course.currentCourseOffering.courseOfferingStatus == T(com.ogbrown.devcourses.model.CourseOfferingStatus).ARCHIVED}" class="archived">Archived</li></ul>
+      </td>
+      <td>
+          <h3><span class="archived" th:if="${course.currentCourseOffering.courseOfferingStatus == T(com.ogbrown.devcourses.model.CourseOfferingStatus).ARCHIVED}" th:text="${course.title}">Archived</span><a th:href="${'course/' + course.urlSlug + '/'}" th:text="${course.title}" th:unless="${course.currentCourseOffering.courseOfferingStatus == T(com.ogbrown.devcourses.model.CourseOfferingStatus).ARCHIVED}">Course Title</a> <small th:text="':' + ${course.currentCourseOffering.courseOfferingStatus}"></small></h3><h6 th:text="${'Prerequisites: ' + #strings.defaultString(course.getPrerequisitesShortNames(),'none')}">Prerequisites</h6>
+      </td>
+    </tr>
+</table>
+</div>

@@ -1,0 +1,11 @@
+<div th:fragment="body" th:remove="tag">
+
+	<div class="row text-center mytopofpage">
+	    <div class="alert-info jumbotron" th:each="textBook : ${course.textBooks}">
+			<h2>Optional</h2>
+			<h3 th:text="${textBook.title}">Beginning Java with Eclipse</h3>
+			<h3 th:text="${textBook.author + '; ' + textBook.publisher}">Murach; Urban;  Murach </h3>
+			<h3 th:text="${textBook.isbn}">ISBN: 978-1-89-9</h3>
+		</div>
+	</div>
+</div>
