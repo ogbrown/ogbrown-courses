@@ -5,7 +5,7 @@
 	<artifactId>courses</artifactId>
 	<name>Developer Courses</name>
 	<packaging>war</packaging>
-	<version>0.5.1</version>
+	<version>1.0.0-alpha.1</version>
 	<description>Notes for Learning Java Web Applications Development</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
