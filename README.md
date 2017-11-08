@@ -1,6 +1,13 @@
 O.G. Brown Dev Courses Demo: ogbrown-courses
 =================================
 
+## Table of contents
+
+- [Introduction](#introduction)
+- [Live Demo](#live-demo)
+- [Creator/Author](#creator-author)
+- [Copyright and license](#copyright-and-license)
+
 # Introduction
 
 This project is a Java Web Application that provides an Educational Website to host online class materials for students attending the various courses. The general flow of the website supports:
@@ -28,7 +35,7 @@ This project is a Java Web Application that provides an Educational Website to h
 
 # Live Demo
 
-To see latest version visit https://dev.ogbrown.com
+To see a current version with live data visit https://dev.ogbrown.com
 
 ## Local Demo
 In order to run the application you should configure your Database server correctly.
@@ -64,7 +71,7 @@ Runs on [Apache Tomcat 7+](http://tomcat.apache.org/) and [Java 8](https://java.
 ## Creator/Author
 
 **Oz Brown**
-
+- <https://www.linkedin.com/in/ogbrown/>
 - <https://twitter.com/devogb>
 - <https://github.com/ogbrown>
 
