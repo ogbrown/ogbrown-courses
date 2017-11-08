@@ -5,7 +5,7 @@ O.G. Brown Dev Courses Demo: ogbrown-courses
 
 - [Introduction](#introduction)
 - [Live Demo](#live-demo)
-- [Creator/Author](#creator-author)
+- [Creator/Author](#creator)
 - [Copyright and license](#copyright-and-license)
 
 # Introduction
@@ -68,7 +68,7 @@ This is a demo Java Web Application built using the [Spring Tool Suite](https://
 
 Runs on [Apache Tomcat 7+](http://tomcat.apache.org/) and [Java 8](https://java.com/en/).
 
-## Creator/Author
+## Creator
 
 **Oz Brown**
 - <https://www.linkedin.com/in/ogbrown/>
@@ -78,4 +78,4 @@ Runs on [Apache Tomcat 7+](http://tomcat.apache.org/) and [Java 8](https://java.
 
 ## Copyright and license
 
-Code and documentation copyright 2017 by the author, Oz Brown. Code released under the [MIT License](https://github.com/ogbrown/ogbrown-courses/blob/master/LICENSE).
+Code and documentation copyright 2017 by the creator/author, Oz Brown. Code released under the [MIT License](https://github.com/ogbrown/ogbrown-courses/blob/master/LICENSE).
