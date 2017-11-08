@@ -60,3 +60,15 @@ This is a demo Java Web Application built using the [Spring Tool Suite](https://
 - CSS
 
 Runs on [Apache Tomcat 7+](http://tomcat.apache.org/) and [Java 8](https://java.com/en/).
+
+## Creator/Author
+
+**Oz Brown**
+
+- <https://twitter.com/devogb>
+- <https://github.com/ogbrown>
+
+
+## Copyright and license
+
+Code and documentation copyright 2017 by the author, Oz Brown. Code released under the [MIT License](https://github.com/ogbrown/ogbrown-courses/blob/master/LICENSE).
