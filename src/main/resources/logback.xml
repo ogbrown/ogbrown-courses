@@ -8,7 +8,7 @@
 		</encoder>
 	</appender>
 	<logger name="com.ogbrown" level="DEBUG" />
-	<logger name="net.sf.ehcache" level="TRACE" />
+	<logger name="net.sf.ehcache" level="WARN" />
 	<logger name="org.springframework.web" level="WARN" />
 	<logger name="org.springframework.security" level="WARN" />
 	<logger name="org.springframework" level="WARN" />

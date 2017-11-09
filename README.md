@@ -35,12 +35,15 @@ This project is a Java Web Application that provides an Educational Website to h
 
 # Live Demo
 
-To see a current version with live data visit https://dev.ogbrown.com
+To see a current version with the demo data visit https://web.sbogb.com/ogbrown-courses/
 
 ## Local Demo
 In order to run the application you should configure your Database server correctly.
 You can do this by modifying the values in `src/main/resources/jdbc-demo.properties`.
 
+## Live Site
+
+To see a live site derived from this project visit https://dev.ogbrown.com/
 
 You can deploy the application on the Java servlet container after `mvn install`.
 
