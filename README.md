@@ -35,41 +35,31 @@ This project is a Java Web Application that provides an Educational Website to h
 
 # Live Demo
 
-To see a current version with the demo data visit https://web.sbogb.com/ogbrown-courses/
+To see a current version with the demo data visit <https://web.sbogb.com/ogbrown-courses/>
 
 ## Local Demo
 In order to run the application you should configure your Database server correctly.
 You can do this by modifying the values in `src/main/resources/jdbc-demo.properties`.
 
+You can deploy the application on the Java servlet container after `mvn install`.
+
 ## Live Site
 
-To see a live site derived from this project visit https://dev.ogbrown.com/
+To see a live site derived from this project visit <https://dev.ogbrown.com/>
 
-You can deploy the application on the Java servlet container after `mvn install`.
 
 # Technologies/Dependencies
 
-This is a demo Java Web Application built using the [Spring Tool Suite](https://spring.io/tools) ([Eclipse](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen1a)) configured for Maven with the following dependences: 
-- [Spring Framework 4](https://projects.spring.io/spring-framework/)
-- [Spring Web MVC](https://projects.spring.io/spring-framework/)
-- [Spring Data JPA](https://projects.spring.io/spring-data/)
-- Logback
-- JUnit 4
-- Mockito
-- [Hibernate ORM 5](http://hibernate.org/orm/)
-- [MySQL](http://mysql.com/)
-- EHCache
-- Jackson
-- Castor XML
+This is a demo Java Web Application built using the Spring Tool Suite(Eclipse) configured for Maven with the following dependences: 
+- Spring Framework 4, Spring Web MVC, Spring Data JPA
+- Logback, JUnit 4, Mockito
+- Hibernate ORM 5, MySQL, EHCache, 
+- Jackson, Castor XML
 - Thymeleaf 2.1
 - JSPs
-- WebJars
-- Bootstrap 3
-- JQuery
-- HTML
-- CSS
+- WebJars, Bootstrap 3, JQuery, HTML, CSS
 
-Runs on [Apache Tomcat 7+](http://tomcat.apache.org/) and [Java 8](https://java.com/en/).
+Runs on Apache Tomcat 7+ and Java 8.
 
 ## Creator
 
