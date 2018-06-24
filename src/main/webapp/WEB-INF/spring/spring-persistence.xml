@@ -5,23 +5,29 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<context:property-placeholder location="classpath:jdbc-local.properties"/>
+	<context:property-placeholder location="classpath:jdbc-production.properties"/>
 
 	<jpa:repositories base-package="com.ogbrown.devcourses.repository" />
 	
-	<beans:bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    	<beans:property name="driverClassName" value="${jdbc.driverClassName}" />
-        <beans:property name="url" value="${jdbc.url}" />
-        <beans:property name="username" value="${jdbc.username}" />
-        <beans:property name="password" value="${jdbc.password}" />
-    </beans:bean>
+<!-- 	<beans:bean id="dataSource" -->
+<!-- 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!--     	<beans:property name="driverClassName" value="${jdbc.driverClassName}" /> -->
+<!--         <beans:property name="url" value="${jdbc.url}" /> -->
+<!--         <beans:property name="username" value="${jdbc.username}" /> -->
+<!--         <beans:property name="password" value="${jdbc.password}" /> -->
+<!--     </beans:bean> -->
+    <jdbc:embedded-database id="dataSource" type="HSQL">
+		<jdbc:script location="classpath:db/sql/ogbrown-courses-create.sql" />
+		<jdbc:script location="classpath:db/sql/ogbrown-courses-insert.sql" />
+	</jdbc:embedded-database>
 <!--   <beans:property name="initialSize" value="${jdbctest.initialSize}" /> -->
 <!--   <beans:property name="maxActive" value="${jdbctest.maxActive}" /> -->
 	<beans:bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -30,13 +36,14 @@
 		<beans:property name="packagesToScan" value="com.ogbrown.devcourses.model" />
 		<beans:property name="jpaProperties">
 			<beans:props>
-				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQL57InnoDBDialect</beans:prop>
+<!-- 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQL57InnoDBDialect</beans:prop> -->
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</beans:prop>
 				<beans:prop key="hibernate.show_sql">false</beans:prop>
-				<beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
+				<beans:prop key="hibernate.hbm2ddl.auto">create</beans:prop>
 				<!-- Disable the second-level cache  -->
-<!--                 <beans:prop key="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</beans:prop> -->
-				<beans:prop key="hibernate.cache.use_second_level_cache">true</beans:prop>
-			    <beans:prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</beans:prop>
+                <beans:prop key="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</beans:prop>
+<!-- 				<beans:prop key="hibernate.cache.use_second_level_cache">true</beans:prop> -->
+<!-- 			    <beans:prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</beans:prop> -->
                 <beans:prop key="hibernate.enable_lazy_load_no_trans">true</beans:prop>
 			</beans:props>
 		</beans:property>

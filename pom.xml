@@ -15,6 +15,7 @@
 		<org.springframework.security-version>4.2.2.RELEASE</org.springframework.security-version>
 		<org.springframework.data-jpa-version>1.10.5.RELEASE</org.springframework.data-jpa-version>
 		<querydsl-jpa-version>4.1.4</querydsl-jpa-version>
+		<hsqldb.version>2.4.0</hsqldb.version>
 		<org.hibernate-version>5.1.10.Final</org.hibernate-version>
 		<org.aspectj-version>1.8.9</org.aspectj-version>
 		<org.slf4j-version>1.7.21</org.slf4j-version>
@@ -134,7 +135,12 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
-		
+		<!-- HyperSQL DB -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>${hsqldb.version}</version>
+		</dependency>
 		<!-- MySQL Database -->
 		<dependency>
 			<groupId>mysql</groupId>
