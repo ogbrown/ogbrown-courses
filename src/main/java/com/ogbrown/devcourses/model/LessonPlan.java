@@ -5,9 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.cache.annotation.Cacheable;
 
-@Cacheable("lessonplans")
+@Cacheable(value="deviceCache")
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 @Entity
 public class LessonPlan {
     @Id

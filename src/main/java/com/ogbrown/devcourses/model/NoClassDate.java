@@ -1,13 +1,16 @@
 package com.ogbrown.devcourses.model;
 
 import java.io.Serializable;
-import java.util.Date;
-
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.cache.annotation.Cacheable;
+
+@Cacheable(value="deviceCache")
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 @Entity
 public class NoClassDate implements Serializable {
 
@@ -16,15 +19,14 @@ public class NoClassDate implements Serializable {
     }
     private static final long serialVersionUID = 1L;
     @Id
-    @Temporal(TemporalType.DATE)
-    private Date day;
+    private LocalDate day;
     private String description;
    
-    public Date getDay() {
+    public LocalDate getDay() {
         return day;
     }
 
-    public void setDay(Date day) {
+    public void setDay(LocalDate day) {
         this.day = day;
     }
     

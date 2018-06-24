@@ -2,12 +2,18 @@ package com.ogbrown.devcourses.model;
 
 import java.io.Serializable;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.cache.annotation.Cacheable;
+@Cacheable(value="deviceCache")
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 @Entity
 public class Instructor implements Serializable {
     public final static Long DEFAULT_INSTRUCTOR_ID = 9999L;

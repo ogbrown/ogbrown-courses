@@ -1,12 +1,12 @@
 package com.ogbrown.devcourses.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
-
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,21 +25,19 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.cache.annotation.Cacheable;
 
 @Entity
-@Cacheable("courses")
+@Cacheable(value="deviceCache")
 @Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 public class Course implements Serializable {
 	/**
 	 * 
 	 */
-
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String title;
 	private String shortTitle;
-
-	@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
+	
 	@OneToMany(cascade = {CascadeType.PERSIST})
     @JoinColumn(name="COURSE_ID")
 	private List<CourseLabel> courseLabels;
@@ -71,7 +69,7 @@ public class Course implements Serializable {
 	private CourseOffering currentCourseOffering;
 	//use CourseService to update currentSchedule
 	@Transient
-    private List<Date> currentSchedule;
+    private List<LocalDate> currentSchedule;
 	@Transient
 	private SortedMap<Short,List<LessonPlan>> lessonPlanMap;
 	@Transient
@@ -189,13 +187,13 @@ public class Course implements Serializable {
     }
     
 
-    public List<Date> getCurrentSchedule() {
+    public List<LocalDate> getCurrentSchedule() {
         return currentSchedule;
     }
 
 
-    public void setCurrentSchedule(List<Date> currentSchedule) {
-        this.currentSchedule = currentSchedule;
+    public void setCurrentSchedule(List<LocalDate> list) {
+        this.currentSchedule = list;
     } 
 
 

@@ -11,7 +11,7 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<context:property-placeholder location="classpath:jdbc-local.properties"/>
+	<context:property-placeholder location="classpath:jdbc-production.properties"/>
 
 	<jpa:repositories base-package="com.ogbrown.devcourses.repository" />
 	

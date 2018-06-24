@@ -6,7 +6,6 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -27,14 +26,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ogbrown.devcourses.model.Course;
 import com.ogbrown.devcourses.model.CourseOffering;
-import com.ogbrown.devcourses.model.CourseOfferingStatus;
 import com.ogbrown.devcourses.model.CoursePage;
 import com.ogbrown.devcourses.model.CourseSession;
-import com.ogbrown.devcourses.model.CourseSessionPk;
 import com.ogbrown.devcourses.model.Instructor;
 import com.ogbrown.devcourses.model.LessonPlan;
 import com.ogbrown.devcourses.model.NoClassDates;
-import com.ogbrown.devcourses.repository.CourseOfferingRepository;
 import com.ogbrown.devcourses.repository.CourseRepository;
 import com.ogbrown.devcourses.repository.CourseSessionRepository;
 import com.ogbrown.devcourses.repository.InstructorRepository;
@@ -49,8 +45,8 @@ public class CourseServiceImpl implements CourseService {
 //    private CourseOfferingRepository courseOfferingRepository;
 	@Autowired
     private CourseSessionRepository courseSessionRepository;
-	@Autowired
-	private InstructorRepository instructorRepository;
+    @Autowired
+    private InstructorRepository instructorRepository;
 	@Autowired
     private NoClassDateRepository noClassDateRepository;
 	@PersistenceContext
@@ -167,28 +163,28 @@ public class CourseServiceImpl implements CourseService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Date> getCourseSchedule(CourseOffering courseOffering) {
-	    List<Date> resultArray = new ArrayList<Date>();
+    public List<LocalDate> getCourseSchedule(CourseOffering courseOffering) {
+	    List<LocalDate> resultArray = new ArrayList<LocalDate>();
 	    courseOffering.setDaysOfWeekArray(DaysOfWeekUtility.getDaysOfWeekArray(courseOffering.getDaysOfWeek()));
 	    int meetingDatesPerWeek = courseOffering.getDaysOfWeekArray().length;
 	    resultArray.add(courseOffering.getStart());
 //	    LocalDate input = new java.sql.Date(courseOffering.getStart().getTime()).toLocalDate();
 	    for (int session=1; session < courseOffering.getSessionCount(); ) {
 	        for (int meetingInWeek = 0; meetingInWeek < meetingDatesPerWeek; meetingInWeek++ ) {
-	            Date nextDate = getNextMeetingDate(resultArray.get(session - 1), courseOffering.getDaysOfWeekArray()[meetingInWeek]);
+	            LocalDate nextDate = getNextMeetingDate(resultArray.get(session - 1), courseOffering.getDaysOfWeekArray()[meetingInWeek]);
 	            resultArray.add(nextDate);
 	            session++;
 	        }
 	        
 	    }
-	    Iterator<Date> iter = resultArray.iterator();
-	    List<Date> additionalDates = new ArrayList<Date>();
+	    Iterator<LocalDate> iter = resultArray.iterator();
+	    List<LocalDate> additionalDates = new ArrayList<LocalDate>();
 	    int deleteDatesCount = 0;
 	    while (iter.hasNext()) {
-	        Date checkDate = iter.next();
+	        LocalDate checkDate = iter.next();
 	        if (NoClassDates.containsDate(checkDate)) {
-	            Date lastDate = resultArray.get(resultArray.size()-1);
-	            DayOfWeek lastDayOfWeek = new java.sql.Date(lastDate.getTime()).toLocalDate().getDayOfWeek();
+	            LocalDate lastDate = resultArray.get(resultArray.size()-1);
+	            DayOfWeek lastDayOfWeek = lastDate.getDayOfWeek();
 	            if (courseOffering.getDaysOfWeekArray().length == 1) {
 	                additionalDates.add(getNextMeetingDate(lastDate, lastDayOfWeek));
 	            }
@@ -204,9 +200,8 @@ public class CourseServiceImpl implements CourseService {
 	    }
 	    return additionalDates;
 	}
-	private Date getNextMeetingDate(Date classDate, DayOfWeek dayOfWeek) {
-	    LocalDate input = new java.sql.Date(classDate.getTime()).toLocalDate();
-	    return java.sql.Date.valueOf(input.with(TemporalAdjusters.next(dayOfWeek)));
+	private LocalDate getNextMeetingDate(LocalDate classDate, DayOfWeek dayOfWeek) {
+	    return classDate.with(TemporalAdjusters.next(dayOfWeek));
 	}
 
 }

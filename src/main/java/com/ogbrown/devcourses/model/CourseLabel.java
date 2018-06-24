@@ -3,7 +3,6 @@ package com.ogbrown.devcourses.model;
 import java.io.Serializable;
 import java.sql.Date;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.cache.annotation.Cacheable;
 
 @Entity
-@Cacheable("courselabels")
+@Cacheable(value="deviceCache")
 @Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 @Table(name="CourseLabels")
 public class CourseLabel implements Serializable {
@@ -28,7 +27,7 @@ public class CourseLabel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
+	
 	@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 	@ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")

@@ -22,9 +22,9 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.cache.annotation.Cacheable;
 
-@Entity
-@Cacheable("pages")
+@Cacheable(value="deviceCache")
 @Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
+@Entity
 public class Page implements Cloneable, Serializable {
 	/**
 	 * 

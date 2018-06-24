@@ -1,5 +1,6 @@
 package com.ogbrown.devcourses.service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,5 +15,5 @@ public interface CourseService {
 
     Course getCourse(String urlSlug);
 
-    List<Date> getCourseSchedule(CourseOffering courseOffering);
+    List<LocalDate> getCourseSchedule(CourseOffering courseOffering);
 }

@@ -2,10 +2,10 @@ package com.ogbrown.devcourses.model;
 
 import java.io.Serializable;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,8 +19,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
@@ -28,7 +26,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.cache.annotation.Cacheable;
 
 @Entity
-@Cacheable("courseofferings")
+@Cacheable(value="deviceCache")
 @Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 public class CourseOffering implements Serializable {
 
@@ -44,14 +42,14 @@ public class CourseOffering implements Serializable {
 	private String term;
 	private String location;
 	private String room;
-	@Temporal(TemporalType.DATE)
-	private Date start;
-	@Temporal(TemporalType.TIME)
-	private Date startTime;
-	@Temporal(TemporalType.TIME)
-	private Date endTime;
-	@Temporal(TemporalType.DATE)
-	private Date end;
+//	@Temporal(TemporalType.DATE)
+	private LocalDate start;
+//	@Temporal(TemporalType.TIME)
+	private LocalDateTime startTime;
+//	@Temporal(TemporalType.TIME)
+	private LocalDateTime endTime;
+//	@Temporal(TemporalType.DATE)
+	private LocalDate end;
 	private String daysOfWeek; 
 	private int sessionCount;
 	private float contEdHours;
@@ -125,35 +123,35 @@ public class CourseOffering implements Serializable {
 		this.room = room;
 	}
 
-	public Date getStart() {
+	public LocalDate getStart() {
 		return start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(LocalDate start) {
 		this.start = start;
 	}
 
-	public Date getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public LocalDateTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
 	}
 
-	public Date getEnd() {
+	public LocalDate getEnd() {
 		return end;
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(LocalDate end) {
 		this.end = end;
 	}
 
