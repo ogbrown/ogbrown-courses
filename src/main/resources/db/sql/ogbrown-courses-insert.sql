@@ -8,7 +8,7 @@ USE `ogbrown_courses_demo`;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -22,18 +22,18 @@ USE `ogbrown_courses_demo`;
 
 DROP TABLE IF EXISTS `Course`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Course` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `courseLabel` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `instructor` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `courseLabel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instructor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `numberOfSessions` smallint(6) DEFAULT NULL,
-  `shortTitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `urlSlug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `shortTitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `urlSlug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_4q1l1lo98om8pajg4fw8e1tbd` (`urlSlug`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000000 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1000000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,17 +52,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CourseLabels`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `CourseLabels` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `label` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `course_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKb90oea4qrlejb0s0lu8b9lygg` (`course_id`),
   CONSTRAINT `FK_11wj0mh7nemslsqjqd0enmxp0` FOREIGN KEY (`course_id`) REFERENCES `Course` (`id`),
   CONSTRAINT `FKb90oea4qrlejb0s0lu8b9lygg` FOREIGN KEY (`course_id`) REFERENCES `Course` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,29 +81,29 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CourseOffering`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `CourseOffering` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `contEdHours` float NOT NULL,
   `courseNumber` int(11) NOT NULL,
-  `daysOfWeek` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `daysOfWeek` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `end` date DEFAULT NULL,
   `endTime` time DEFAULT NULL,
-  `location` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `room` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `room` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sessionCount` int(11) NOT NULL,
   `start` date DEFAULT NULL,
   `startTime` time DEFAULT NULL,
-  `term` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `term` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `termNumber` int(11) NOT NULL,
   `COURSE_ID` bigint(20) DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `seats` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_3pttw0vnf366y9gtm9esfmlsi` (`COURSE_ID`),
   CONSTRAINT `FK_3pttw0vnf366y9gtm9esfmlsi` FOREIGN KEY (`COURSE_ID`) REFERENCES `Course` (`id`),
   CONSTRAINT `FKnfv3l863v08kobe9qumu0tdi3` FOREIGN KEY (`COURSE_ID`) REFERENCES `Course` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,14 +122,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `CourseSession`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `CourseSession` (
   `courseid` bigint(20) NOT NULL DEFAULT '0',
   `sessionnumber` smallint(6) NOT NULL,
   PRIMARY KEY (`courseid`,`sessionnumber`),
   CONSTRAINT `FK_kxovit7vv0jcmblupa16yns7h` FOREIGN KEY (`courseid`) REFERENCES `Course` (`id`),
   CONSTRAINT `FKte9f7lhbgus82kngcq5oqlmpr` FOREIGN KEY (`courseid`) REFERENCES `Course` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,21 +148,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `Instructor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Instructor` (
   `id` bigint(20) NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `emailInst` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `firstName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `lastName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `middleInitial` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nickname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `phoneInst` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `suffix` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `website` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `emailInst` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `firstName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `middleInitial` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nickname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phoneInst` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `suffix` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,14 +181,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `LessonPlan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `LessonPlan` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `defaultSession` int(11) NOT NULL,
-  `lesson` text CHARACTER SET utf8,
+  `lesson` text CHARACTER SET utf8mb4,
   `lessonOrd` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,12 +207,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `NoClassDate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `NoClassDate` (
   `day` date NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`day`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,13 +231,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `Objective`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Objective` (
   `id` bigint(20) NOT NULL,
-  `objective` text CHARACTER SET utf8,
+  `objective` text CHARACTER SET utf8mb4,
   `objord` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,24 +256,24 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `Page`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Page` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `content` text COLLATE utf8_unicode_ci,
-  `contentHeader` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `metaDescription` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nextPageLinkOverride` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `notes` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci,
+  `contentHeader` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `metaDescription` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nextPageLinkOverride` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `notes` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pageOrd` smallint(6) DEFAULT NULL,
-  `prevPageLinkOverride` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `prevPageLinkOverride` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `published` bit(1) DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `urlSlug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `urlSlug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `protectedPage` bit(1) DEFAULT NULL,
-  `folderUrlSlug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `folderUrlSlug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_85uxlhun6n95cd6ko6mbr2ekw` (`urlSlug`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -292,14 +292,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `Page_metaKeywords`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Page_metaKeywords` (
   `Page_id` bigint(20) NOT NULL,
-  `metaKeywords` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `metaKeywords` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   KEY `FK_qtb54gduea46mj57uw6dhjhjg` (`Page_id`),
   CONSTRAINT `FK_qtb54gduea46mj57uw6dhjhjg` FOREIGN KEY (`Page_id`) REFERENCES `Page` (`id`),
   CONSTRAINT `FKrypg1fsk9imrevo4k0fhr4sjl` FOREIGN KEY (`Page_id`) REFERENCES `Page` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,17 +318,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `TextBook`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `TextBook` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `author` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `edition` smallint(6) NOT NULL,
-  `isbn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `isbn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `publishedDate` date DEFAULT NULL,
-  `publisher` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `publisher` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,7 +347,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `children_parents_pages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `children_parents_pages` (
   `childid` bigint(20) NOT NULL,
   `parentid` bigint(20) NOT NULL,
@@ -355,7 +355,7 @@ CREATE TABLE `children_parents_pages` (
   KEY `FKsygyobwv4ku7k201ct85ul64r` (`childid`),
   CONSTRAINT `FKsygyobwv4ku7k201ct85ul64r` FOREIGN KEY (`childid`) REFERENCES `Page` (`id`),
   CONSTRAINT `FKt3cdkccgf0a2ho5qct1b6ayp8` FOREIGN KEY (`parentid`) REFERENCES `Page` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -373,7 +373,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_objectives`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `course_objectives` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `objective_id` bigint(20) NOT NULL,
@@ -384,7 +384,7 @@ CREATE TABLE `course_objectives` (
   CONSTRAINT `FK_760pqlpkml1s3fmxeluwe95b2` FOREIGN KEY (`course_id`) REFERENCES `Course` (`id`),
   CONSTRAINT `FKp3h909yv5anol9n0uo1b7n18m` FOREIGN KEY (`objective_id`) REFERENCES `Objective` (`id`),
   CONSTRAINT `FKqrdjhe1vx6dqetng584es7mcu` FOREIGN KEY (`course_id`) REFERENCES `Course` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -403,7 +403,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_prereqs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `course_prereqs` (
   `id` bigint(20) NOT NULL,
   `prereq_id` bigint(20) NOT NULL,
@@ -413,7 +413,7 @@ CREATE TABLE `course_prereqs` (
   CONSTRAINT `FK4i20l7v4tcp12gixpnwnavthc` FOREIGN KEY (`prereq_id`) REFERENCES `Course` (`id`),
   CONSTRAINT `FK_meamg1vc1fmw5ip749s37etys` FOREIGN KEY (`id`) REFERENCES `Course` (`id`),
   CONSTRAINT `FK_o59br2luk5gxl9fkfqggrtejk` FOREIGN KEY (`prereq_id`) REFERENCES `Course` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -432,7 +432,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `course_textbooks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `course_textbooks` (
   `id` bigint(20) NOT NULL,
   `textbook_id` bigint(20) NOT NULL,
@@ -442,7 +442,7 @@ CREATE TABLE `course_textbooks` (
   CONSTRAINT `FK_rfnfomi2akelag8d62scthnbv` FOREIGN KEY (`textbook_id`) REFERENCES `TextBook` (`id`),
   CONSTRAINT `FKfrehn2ohpxv7vf6hbk733crrg` FOREIGN KEY (`textbook_id`) REFERENCES `TextBook` (`id`),
   CONSTRAINT `FKsafc8bwk8hsl1bweoq87b6n6a` FOREIGN KEY (`id`) REFERENCES `Course` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -461,7 +461,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `courseoffering_instructors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `courseoffering_instructors` (
   `CourseOffering_id` bigint(20) NOT NULL,
   `instructors_id` bigint(20) NOT NULL,
@@ -470,7 +470,7 @@ CREATE TABLE `courseoffering_instructors` (
   CONSTRAINT `FK1diqxfsafqj2u37rojv8hbrl6` FOREIGN KEY (`instructors_id`) REFERENCES `Instructor` (`id`),
   CONSTRAINT `FK42lf6eco538wpisdkwylypva9` FOREIGN KEY (`CourseOffering_id`) REFERENCES `CourseOffering` (`id`),
   CONSTRAINT `FK_t8edy4vheget2o6gl4jldjr89` FOREIGN KEY (`CourseOffering_id`) REFERENCES `CourseOffering` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -489,7 +489,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `coursesession_lessonplan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `coursesession_lessonplan` (
   `courseid` bigint(20) NOT NULL,
   `sessionnumber` smallint(6) NOT NULL,
@@ -499,7 +499,7 @@ CREATE TABLE `coursesession_lessonplan` (
   CONSTRAINT `FK_g2jh4knxqrmkwip5ikvi7e7xs` FOREIGN KEY (`courseid`, `sessionnumber`) REFERENCES `CourseSession` (`courseid`, `sessionnumber`),
   CONSTRAINT `FKl1l4obqx8mst5clsprq6l4145` FOREIGN KEY (`courseid`, `sessionnumber`) REFERENCES `CourseSession` (`courseid`, `sessionnumber`),
   CONSTRAINT `FKqicls0rgto0ge7hu67pc04n77` FOREIGN KEY (`lessonplanid`) REFERENCES `LessonPlan` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -518,7 +518,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `coursesessions_pages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `coursesessions_pages` (
   `pageid` bigint(20) NOT NULL,
   `courseid` bigint(20) NOT NULL,
@@ -530,7 +530,7 @@ CREATE TABLE `coursesessions_pages` (
   CONSTRAINT `FK_7igrpx1georshtc9ommi1nwl5` FOREIGN KEY (`courseid`, `sessionnumber`) REFERENCES `CourseSession` (`courseid`, `sessionnumber`),
   CONSTRAINT `FK_k2kcvp0aik2w5aud40c1jtn9c` FOREIGN KEY (`pageid`) REFERENCES `Page` (`id`),
   CONSTRAINT `FKi6rct4p3u3sguo1bkvb4wbgy3` FOREIGN KEY (`pageid`) REFERENCES `Page` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -549,10 +549,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `hibernate_sequence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -571,7 +571,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `parents_children_pages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `parents_children_pages` (
   `childid` bigint(20) NOT NULL,
   `parentid` bigint(20) NOT NULL,
@@ -579,7 +579,7 @@ CREATE TABLE `parents_children_pages` (
   KEY `FKs4sa53bk5li9k21nry920kyp` (`childid`),
   CONSTRAINT `FKcfu68bxrxuqu5hxcp2va4f8nk` FOREIGN KEY (`parentid`) REFERENCES `Page` (`id`),
   CONSTRAINT `FKs4sa53bk5li9k21nry920kyp` FOREIGN KEY (`childid`) REFERENCES `Page` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
