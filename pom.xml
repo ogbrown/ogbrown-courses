@@ -11,6 +11,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java-version>1.8</java-version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<failOnMissingWebXml>false</failOnMissingWebXml>		
 		<org.springframework-version>4.3.5.RELEASE</org.springframework-version>
 		<org.springframework.security-version>4.2.2.RELEASE</org.springframework.security-version>
 		<org.springframework.data-jpa-version>1.10.5.RELEASE</org.springframework.data-jpa-version>
@@ -562,7 +565,12 @@
 			            </configuration>
 			        </execution>
 			    </executions>
-			</plugin>			
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+      		</plugin>						
 		</plugins>
 	</build>
 </project>
