@@ -1,14 +1,31 @@
+/*
+ * Copyright (c) 2017 - 2019 Oswald G. Brown, III
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.ogbrown.devcourses.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.Objects;
 
 @Entity
 public class TextBook implements Serializable {
@@ -100,67 +117,24 @@ public class TextBook implements Serializable {
     }
 
 
-  
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TextBook textBook = (TextBook) o;
+        return edition == textBook.edition &&
+                Objects.equals(id, textBook.id) &&
+                Objects.equals(title, textBook.title) &&
+                Objects.equals(publisher, textBook.publisher) &&
+                Objects.equals(author, textBook.author) &&
+                Objects.equals(isbn, textBook.isbn) &&
+                Objects.equals(publishedDate, textBook.publishedDate);
+    }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((author == null) ? 0 : author.hashCode());
-        result = prime * result + edition;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
-        result = prime * result + ((publishedDate == null) ? 0 : publishedDate.hashCode());
-        result = prime * result + ((publisher == null) ? 0 : publisher.hashCode());
-        result = prime * result + ((title == null) ? 0 : title.hashCode());
-        return result;
+        return Objects.hash(id, title, edition, publisher, author, isbn, publishedDate);
     }
-
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        TextBook other = (TextBook) obj;
-        if (author == null) {
-            if (other.author != null)
-                return false;
-        } else if (!author.equals(other.author))
-            return false;
-        if (edition != other.edition)
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (isbn == null) {
-            if (other.isbn != null)
-                return false;
-        } else if (!isbn.equals(other.isbn))
-            return false;
-        if (publishedDate == null) {
-            if (other.publishedDate != null)
-                return false;
-        } else if (!publishedDate.equals(other.publishedDate))
-            return false;
-        if (publisher == null) {
-            if (other.publisher != null)
-                return false;
-        } else if (!publisher.equals(other.publisher))
-            return false;
-        if (title == null) {
-            if (other.title != null)
-                return false;
-        } else if (!title.equals(other.title))
-            return false;
-        return true;
-    }
-
 
     @Override
     public String toString() {

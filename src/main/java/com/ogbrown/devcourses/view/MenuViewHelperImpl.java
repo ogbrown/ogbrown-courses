@@ -1,17 +1,34 @@
+/*
+ * Copyright (c) 2017 - 2019 Oswald G. Brown, III
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.ogbrown.devcourses.view;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-
+import com.ogbrown.devcourses.model.Page;
+import com.ogbrown.devcourses.model.dto.MenuItemDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.ogbrown.devcourses.model.Page;
-import com.ogbrown.devcourses.web.dto.MenuItemDto;
+import java.util.*;
 
 @Component("menuViewHelper")
 public class MenuViewHelperImpl implements MenuViewHelper {
@@ -25,17 +42,10 @@ public class MenuViewHelperImpl implements MenuViewHelper {
 	@Override
 	public List<MenuItemDto> getMenuItems(List<Page> pages) {
 		List<MenuItemDto> menuItemDtos = new ArrayList<MenuItemDto>();
-		// MenuItemDto menuItem = new MenuItemDto(pages.get(0));
 		for (Page p : pages) {
 			menuItemDtos.add(new MenuItemDto(p));
 		}
-		Collections.sort(menuItemDtos, new Comparator<MenuItemDto>() {
-
-			@Override
-			public int compare(MenuItemDto o1, MenuItemDto o2) {
-				return o1.getMenuOrder() - o2.getMenuOrder();
-			}
-		});
+		Collections.sort(menuItemDtos, (o1, o2) -> o1.getMenuOrder() - o2.getMenuOrder());
 		return menuItemDtos;
 	}
 
@@ -45,9 +55,9 @@ public class MenuViewHelperImpl implements MenuViewHelper {
 		Iterator<MenuItemDto> menuItemIterator = menuItemDtos.iterator();
 		while (menuItemIterator.hasNext()) {
 			MenuItemDto m = menuItemIterator.next();
-			if (m.getUrlSlug().isEmpty()) {
+			if (m.getUrlSlug().isEmpty() || m.getUrlSlug().contains("home")) {
 				menuItemIterator.remove();
-				break;
+				continue;
 			}
 		}
 		return menuItemDtos;
@@ -67,12 +77,6 @@ public class MenuViewHelperImpl implements MenuViewHelper {
 			parentLink.setId(DEFAULT_LINK_ID);
 		} else {
 			parentLink = new MenuItemDto(pagePersistedObj.getParentPages().get(0));
-//			if (courseUrl.contains("/" + parentLink.getUrlSlug() + "/")) {
-//				parentLink.setUrlSlug(courseUrl.substring(0, courseUrl.length() - 1));
-//			} else {
-//				
-//				parentLink.setUrlSlug(courseUrl + "/" + parentLink.getUrlSlug());
-//			}
 			List<Page> tmpPages = pagePersistedObj.getParentPages();
 			MenuItemDto tmpParentLink = parentLink;
 			String linkRelativeToParent = "";
@@ -120,18 +124,11 @@ public class MenuViewHelperImpl implements MenuViewHelper {
 	@Override
 	public List<MenuItemDto> getChildPagesMenuItems(Page page) {
 		List<MenuItemDto> menuItemDtos = new ArrayList<MenuItemDto>();
-		// MenuItemDto menuItem = new MenuItemDto(pages.get(0));
 		for (Page p : page.getChildPages()) {
 			menuItemDtos.add(new MenuItemDto(p));
 		}
 		if (menuItemDtos.size() > 1) {
-			Collections.sort(menuItemDtos, new Comparator<MenuItemDto>() {
-
-				@Override
-				public int compare(MenuItemDto o1, MenuItemDto o2) {
-					return o1.getMenuOrder() - o2.getMenuOrder();
-				}
-			});
+			Collections.sort(menuItemDtos, (o1, o2) -> o1.getMenuOrder() - o2.getMenuOrder());
 		}
 		return menuItemDtos;
 	}

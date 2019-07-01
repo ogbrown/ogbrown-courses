@@ -1,29 +1,39 @@
+/*
+ * Copyright (c) 2017 - 2019 Oswald G. Brown, III
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.ogbrown.devcourses.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.cache.annotation.Cacheable;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.cache.annotation.Cacheable;
+import java.util.Objects;
 
 @Entity
 @Cacheable(value="deviceCache")
@@ -220,115 +230,36 @@ public class CourseOffering implements Serializable {
         this.courseOfferingStatus = courseOfferingStatus;
     }
 
-    
-
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + Float.floatToIntBits(contEdHours);
-        result = prime * result + courseNumber;
-        result = prime * result + ((courseOfferingStatus == null) ? 0 : courseOfferingStatus.hashCode());
-        result = prime * result + ((daysOfWeek == null) ? 0 : daysOfWeek.hashCode());
-        result = prime * result + Arrays.hashCode(daysOfWeekArray);
-        result = prime * result + ((daysOfWeekCsv == null) ? 0 : daysOfWeekCsv.hashCode());
-        result = prime * result + ((end == null) ? 0 : end.hashCode());
-        result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((instructors == null) ? 0 : instructors.hashCode());
-        result = prime * result + ((location == null) ? 0 : location.hashCode());
-        result = prime * result + ((room == null) ? 0 : room.hashCode());
-        result = prime * result + ((seats == null) ? 0 : seats.hashCode());
-        result = prime * result + sessionCount;
-        result = prime * result + ((start == null) ? 0 : start.hashCode());
-        result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
-        result = prime * result + ((term == null) ? 0 : term.hashCode());
-        result = prime * result + termNumber;
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CourseOffering that = (CourseOffering) o;
+        return courseNumber == that.courseNumber &&
+                termNumber == that.termNumber &&
+                sessionCount == that.sessionCount &&
+                Float.compare(that.contEdHours, contEdHours) == 0 &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(term, that.term) &&
+                Objects.equals(location, that.location) &&
+                Objects.equals(room, that.room) &&
+                Objects.equals(start, that.start) &&
+                Objects.equals(startTime, that.startTime) &&
+                Objects.equals(endTime, that.endTime) &&
+                Objects.equals(end, that.end) &&
+                Objects.equals(daysOfWeek, that.daysOfWeek) &&
+                Objects.equals(instructors, that.instructors) &&
+                Objects.equals(seats, that.seats) &&
+                courseOfferingStatus == that.courseOfferingStatus &&
+                Arrays.equals(daysOfWeekArray, that.daysOfWeekArray) &&
+                Objects.equals(daysOfWeekCsv, that.daysOfWeekCsv);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        CourseOffering other = (CourseOffering) obj;
-        if (Float.floatToIntBits(contEdHours) != Float.floatToIntBits(other.contEdHours))
-            return false;
-        if (courseNumber != other.courseNumber)
-            return false;
-        if (courseOfferingStatus != other.courseOfferingStatus)
-            return false;
-        if (daysOfWeek == null) {
-            if (other.daysOfWeek != null)
-                return false;
-        } else if (!daysOfWeek.equals(other.daysOfWeek))
-            return false;
-        if (!Arrays.equals(daysOfWeekArray, other.daysOfWeekArray))
-            return false;
-        if (daysOfWeekCsv == null) {
-            if (other.daysOfWeekCsv != null)
-                return false;
-        } else if (!daysOfWeekCsv.equals(other.daysOfWeekCsv))
-            return false;
-        if (end == null) {
-            if (other.end != null)
-                return false;
-        } else if (!end.equals(other.end))
-            return false;
-        if (endTime == null) {
-            if (other.endTime != null)
-                return false;
-        } else if (!endTime.equals(other.endTime))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (instructors == null) {
-            if (other.instructors != null)
-                return false;
-        } else if (!instructors.equals(other.instructors))
-            return false;
-        if (location == null) {
-            if (other.location != null)
-                return false;
-        } else if (!location.equals(other.location))
-            return false;
-        if (room == null) {
-            if (other.room != null)
-                return false;
-        } else if (!room.equals(other.room))
-            return false;
-        if (seats == null) {
-            if (other.seats != null)
-                return false;
-        } else if (!seats.equals(other.seats))
-            return false;
-        if (sessionCount != other.sessionCount)
-            return false;
-        if (start == null) {
-            if (other.start != null)
-                return false;
-        } else if (!start.equals(other.start))
-            return false;
-        if (startTime == null) {
-            if (other.startTime != null)
-                return false;
-        } else if (!startTime.equals(other.startTime))
-            return false;
-        if (term == null) {
-            if (other.term != null)
-                return false;
-        } else if (!term.equals(other.term))
-            return false;
-        if (termNumber != other.termNumber)
-            return false;
-        return true;
+    public int hashCode() {
+        int result = Objects.hash(id, courseNumber, termNumber, term, location, room, start, startTime, endTime, end, daysOfWeek, sessionCount, contEdHours, instructors, seats, courseOfferingStatus, daysOfWeekCsv);
+        result = 31 * result + Arrays.hashCode(daysOfWeekArray);
+        return result;
     }
 
     @Override

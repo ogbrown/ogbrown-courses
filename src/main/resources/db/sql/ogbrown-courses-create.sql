@@ -1,1 +1,0 @@
-CREATE DATABASE  IF NOT EXISTS `ogbrown_courses_demo` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;

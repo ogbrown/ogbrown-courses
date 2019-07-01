@@ -1,26 +1,34 @@
+/*
+ * Copyright (c) 2017 - 2019 Oswald G. Brown, III
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.ogbrown.devcourses.model;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.cache.annotation.Cacheable;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.*;
 
 @Cacheable(value="deviceCache")
 @Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
@@ -234,152 +242,44 @@ public class Page implements Cloneable, Serializable {
 	public Boolean isProtectedPage() {
 		return protectedPage;
 	}
-	public Boolean getProtectedPage() {
-		return protectedPage;
-	}
 
 	public void setProtectedPage(Boolean protectedPage) {
 		this.protectedPage = protectedPage;
 	}
 
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Page page = (Page) o;
+		return Objects.equals(id, page.id) &&
+				Objects.equals(title, page.title) &&
+				Objects.equals(urlSlug, page.urlSlug) &&
+				Objects.equals(folderUrlSlug, page.folderUrlSlug) &&
+				Objects.equals(metaDescription, page.metaDescription) &&
+				Objects.equals(contentHeader, page.contentHeader) &&
+				Objects.equals(metaKeywords, page.metaKeywords) &&
+				Objects.equals(content, page.content) &&
+				Objects.equals(published, page.published) &&
+				Objects.equals(protectedPage, page.protectedPage) &&
+				Objects.equals(pageOrd, page.pageOrd) &&
+				Objects.equals(parentPages, page.parentPages) &&
+				Objects.equals(childPages, page.childPages) &&
+				Objects.equals(prevPageLinkOverride, page.prevPageLinkOverride) &&
+				Objects.equals(previousPage, page.previousPage) &&
+				Objects.equals(nextPageLinkOverride, page.nextPageLinkOverride) &&
+				Objects.equals(nextPage, page.nextPage) &&
+				Objects.equals(courseSessions, page.courseSessions) &&
+				Objects.equals(notes, page.notes);
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, title, urlSlug, folderUrlSlug, metaDescription, contentHeader, metaKeywords, content, published, protectedPage, pageOrd, parentPages, childPages, prevPageLinkOverride, previousPage, nextPageLinkOverride, nextPage, courseSessions, notes);
+	}
 
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((childPages == null) ? 0 : childPages.hashCode());
-        result = prime * result + ((content == null) ? 0 : content.hashCode());
-        result = prime * result + ((contentHeader == null) ? 0 : contentHeader.hashCode());
-        result = prime * result + ((courseSessions == null) ? 0 : courseSessions.hashCode());
-        result = prime * result + ((folderUrlSlug == null) ? 0 : folderUrlSlug.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((metaDescription == null) ? 0 : metaDescription.hashCode());
-        result = prime * result + ((metaKeywords == null) ? 0 : metaKeywords.hashCode());
-        result = prime * result + ((nextPage == null) ? 0 : nextPage.hashCode());
-        result = prime * result + ((nextPageLinkOverride == null) ? 0 : nextPageLinkOverride.hashCode());
-        result = prime * result + ((notes == null) ? 0 : notes.hashCode());
-        result = prime * result + ((pageOrd == null) ? 0 : pageOrd.hashCode());
-        result = prime * result + ((parentPages == null) ? 0 : parentPages.hashCode());
-        result = prime * result + ((prevPageLinkOverride == null) ? 0 : prevPageLinkOverride.hashCode());
-        result = prime * result + ((previousPage == null) ? 0 : previousPage.hashCode());
-        result = prime * result + ((protectedPage == null) ? 0 : protectedPage.hashCode());
-        result = prime * result + ((published == null) ? 0 : published.hashCode());
-        result = prime * result + ((title == null) ? 0 : title.hashCode());
-        result = prime * result + ((urlSlug == null) ? 0 : urlSlug.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Page other = (Page) obj;
-        if (childPages == null) {
-            if (other.childPages != null)
-                return false;
-        } else if (!childPages.equals(other.childPages))
-            return false;
-        if (content == null) {
-            if (other.content != null)
-                return false;
-        } else if (!content.equals(other.content))
-            return false;
-        if (contentHeader == null) {
-            if (other.contentHeader != null)
-                return false;
-        } else if (!contentHeader.equals(other.contentHeader))
-            return false;
-        if (courseSessions == null) {
-            if (other.courseSessions != null)
-                return false;
-        } else if (!courseSessions.equals(other.courseSessions))
-            return false;
-        if (folderUrlSlug == null) {
-            if (other.folderUrlSlug != null)
-                return false;
-        } else if (!folderUrlSlug.equals(other.folderUrlSlug))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (metaDescription == null) {
-            if (other.metaDescription != null)
-                return false;
-        } else if (!metaDescription.equals(other.metaDescription))
-            return false;
-        if (metaKeywords == null) {
-            if (other.metaKeywords != null)
-                return false;
-        } else if (!metaKeywords.equals(other.metaKeywords))
-            return false;
-        if (nextPage == null) {
-            if (other.nextPage != null)
-                return false;
-        } else if (!nextPage.equals(other.nextPage))
-            return false;
-        if (nextPageLinkOverride == null) {
-            if (other.nextPageLinkOverride != null)
-                return false;
-        } else if (!nextPageLinkOverride.equals(other.nextPageLinkOverride))
-            return false;
-        if (notes == null) {
-            if (other.notes != null)
-                return false;
-        } else if (!notes.equals(other.notes))
-            return false;
-        if (pageOrd == null) {
-            if (other.pageOrd != null)
-                return false;
-        } else if (!pageOrd.equals(other.pageOrd))
-            return false;
-        if (parentPages == null) {
-            if (other.parentPages != null)
-                return false;
-        } else if (!parentPages.equals(other.parentPages))
-            return false;
-        if (prevPageLinkOverride == null) {
-            if (other.prevPageLinkOverride != null)
-                return false;
-        } else if (!prevPageLinkOverride.equals(other.prevPageLinkOverride))
-            return false;
-        if (previousPage == null) {
-            if (other.previousPage != null)
-                return false;
-        } else if (!previousPage.equals(other.previousPage))
-            return false;
-        if (protectedPage == null) {
-            if (other.protectedPage != null)
-                return false;
-        } else if (!protectedPage.equals(other.protectedPage))
-            return false;
-        if (published == null) {
-            if (other.published != null)
-                return false;
-        } else if (!published.equals(other.published))
-            return false;
-        if (title == null) {
-            if (other.title != null)
-                return false;
-        } else if (!title.equals(other.title))
-            return false;
-        if (urlSlug == null) {
-            if (other.urlSlug != null)
-                return false;
-        } else if (!urlSlug.equals(other.urlSlug))
-            return false;
-        return true;
-    }
-
-    @Override
+	@Override
 	public String toString() {
 		String startOfString = "Page [id=" + id + ", title=" + title + ", urlSlug=" + urlSlug + ", folderUrlSlug=" + folderUrlSlug +
 		        ", metaDescription=" + metaDescription 

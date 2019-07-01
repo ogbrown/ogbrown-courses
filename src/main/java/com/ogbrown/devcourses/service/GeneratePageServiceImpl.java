@@ -1,33 +1,40 @@
+/*
+ * Copyright (c) 2017 - 2019 Oswald G. Brown, III
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.ogbrown.devcourses.service;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
+import com.ogbrown.devcourses.model.*;
+import com.ogbrown.devcourses.repository.CourseRepository;
+import com.ogbrown.devcourses.repository.CourseSessionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ogbrown.devcourses.model.Course;
-import com.ogbrown.devcourses.model.CoursePage;
-import com.ogbrown.devcourses.model.CourseSession;
-import com.ogbrown.devcourses.model.CourseSessionPage;
-import com.ogbrown.devcourses.model.Page;
-import com.ogbrown.devcourses.repository.CourseRepository;
-import com.ogbrown.devcourses.repository.CourseSessionRepository;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.math.BigInteger;
+import java.util.*;
 
 @Service( "generatePageService" )
 public class GeneratePageServiceImpl extends PageServiceImpl implements GeneratePageService {
@@ -57,9 +64,7 @@ public class GeneratePageServiceImpl extends PageServiceImpl implements Generate
 		Course course = courseRepository.findByUrlSlug(urlSlug);
 
 		CoursePage coursePage = new CoursePage();
-//		Page homePage = getHomePage();
-		
-//		entityManager.detach(coursePage);
+
 		coursePage.setCourseId(course.getId());
 		coursePage.setTitle(course.getTitle());
 		coursePage.setContentHeader(course.getTitle());
@@ -75,7 +80,6 @@ public class GeneratePageServiceImpl extends PageServiceImpl implements Generate
 	public List<Page> getCourseSessionPages(Course course) {
 		CourseSessionPage courseSessionPage = null;
 		Page previousPage = null;
-//		Page nextPage = null;
 		Set<CourseSession> courseSessions = null;
 		List<Page> courseSessionPages = new ArrayList<Page>();
 		
@@ -97,7 +101,7 @@ public class GeneratePageServiceImpl extends PageServiceImpl implements Generate
 			courseSessionPage.setContentHeader(course.getShortTitle() + ": Session " + (i+1) );
 			courseSessionPage.setUrlSlug(course.getUrlSlug() + "-session-" + (i+1));
 			courseSessionPage.setPageOrd((short)(i+1));
-			courseSessions.add(new CourseSession(course,courseSessionPage.getSessionNum(), courseSessionPage.getPageOrd()));
+			courseSessions.add(new CourseSession(course,courseSessionPage.getSessionNum()));
 			courseSessionPage.setCourseSessions(courseSessions);
 			if ( i > 0 ) {
 				courseSessionPage.setPreviousPage(previousPage);
@@ -120,7 +124,7 @@ public class GeneratePageServiceImpl extends PageServiceImpl implements Generate
 			courseSessionPage.setPreviousPage(previousPage);
 			courseSessionPages.get(courseSessionPages.size()-1).setNextPage(courseSessionPage);
 		}
-		courseSessions.add(new CourseSession(course,courseSessionPage.getSessionNum(), courseSessionPage.getPageOrd()));
+		courseSessions.add(new CourseSession(course,courseSessionPage.getSessionNum()));
 		courseSessionPage.setCourseSessions(courseSessions);
 		courseSessionPage.setParentPages(parentPages);
 		courseSessionPages.add(courseSessionPage);
@@ -131,7 +135,6 @@ public class GeneratePageServiceImpl extends PageServiceImpl implements Generate
 	public List<Page> getCourseCommonPages(Course course) {
 		CourseSessionPage courseSessionPage = null;
 		Page previousPage = null;
-//		Page nextPage = null;
 		Set<CourseSession> courseSessions = null;
 		List<Page> courseSessionPages = new ArrayList<Page>();
 		
@@ -153,7 +156,7 @@ public class GeneratePageServiceImpl extends PageServiceImpl implements Generate
 			courseSessionPage.setContentHeader(course.getShortTitle() + ": Session " + (i+1) );
 			courseSessionPage.setUrlSlug(course.getUrlSlug() + "-session-" + (i+1));
 			courseSessionPage.setPageOrd((short)(i+1));
-			courseSessions.add(new CourseSession(course,courseSessionPage.getSessionNum(), courseSessionPage.getPageOrd()));
+			courseSessions.add(new CourseSession(course,courseSessionPage.getSessionNum()));
 			courseSessionPage.setCourseSessions(courseSessions);
 			if ( i > 0 ) {
 				courseSessionPage.setPreviousPage(previousPage);
@@ -176,7 +179,7 @@ public class GeneratePageServiceImpl extends PageServiceImpl implements Generate
 			courseSessionPage.setPreviousPage(previousPage);
 			courseSessionPages.get(courseSessionPages.size()-1).setNextPage(courseSessionPage);
 		}
-		courseSessions.add(new CourseSession(course,courseSessionPage.getSessionNum(), courseSessionPage.getPageOrd()));
+		courseSessions.add(new CourseSession(course,courseSessionPage.getSessionNum()));
 		courseSessionPage.setCourseSessions(courseSessions);
 		courseSessionPage.setParentPages(parentPages);
 		courseSessionPages.add(courseSessionPage);
@@ -190,9 +193,7 @@ public class GeneratePageServiceImpl extends PageServiceImpl implements Generate
 
 	    List<Long> idsList = new ArrayList<Long>();
         List<Page> pages = new ArrayList<Page>();
-        Sort sort = new Sort(Direction.ASC, "pageOrder");
-        
-        
+
 		CoursePage coursePage = getCoursePage(courseUrl);
 		CourseSessionPage courseSessionMenuPage = (CourseSessionPage) coursePage.getChildPages().get(courseSessionNum-1);
 		Iterable<BigInteger> pageIds = courseSessionRepository.findPageIdByCourseAndSessionNumber(coursePage.getCourseId(), (short)(courseSessionNum));
@@ -203,17 +204,6 @@ public class GeneratePageServiceImpl extends PageServiceImpl implements Generate
 
 		    for (Page pageFound : pagesFound) pages.add(pageFound);
 		}
-//		List<Page> pages = new ArrayList<Page>();
-//		pages = pageRepository.findAll(idsList);
-//		if (pages.size() > 1) {
-//			Collections.sort(pages, new Comparator<Page>() {
-//
-//				@Override
-//				public int compare(Page o1, Page o2) {
-//					return o1.getPageOrder() - o2.getPageOrder();
-//				}
-//			});
-//		}
 		for (int i = 0; i < pages.size(); i++) {
 			entityManager.detach(pages.get(i));
 			if (null == pages.get(i).getParentPages() ) {
@@ -250,6 +240,7 @@ public class GeneratePageServiceImpl extends PageServiceImpl implements Generate
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Page getCourseAddlInfoPage(String courseUrl, String pageRequest) {
 		int lastPage = 9999; // arbitrary number to represent last sessionNumber
 		return getCourseSessionPage(courseUrl, lastPage, pageRequest);

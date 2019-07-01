@@ -5,9 +5,9 @@
 	<h3 th:text="${'Number of Sessions: (' + course.currentCourseOffering.sessionCount + '): 90% Attendance= ' + course.currentCourseOffering.sessionCount + ' Sessions'}">Eight (8) Sessions: 90% = 8 Sessions</h3>
 	<ul>
 		<li class="center-block col-md-12" th:each="classDate : ${course.currentSchedule}" >
-		    <h4 th:if="${classDate != null}" th:text="${#calendars.format(classDate,'EEEE : MMMM dd, yyyy; ') 
-		             + #calendars.format(course.currentCourseOffering.startTime,'h:mm aa–')
-		             + #calendars.format(course.currentCourseOffering.endTime,'h:mm aa')}">Wednesday	Oct 25, 2017; 6:30 PM – 9:30 PM</h4>
+		    <h4 th:if="${classDate != null}" th:text="${#temporals.format(classDate,'EEEE : MMMM dd, yyyy; ')
+		             + #temporals.format(course.currentCourseOffering.startTime,'h:mm a–')
+		             + #temporals.format(course.currentCourseOffering.endTime,'h:mm a')}">Wednesday	Oct 25, 2017; 6:30 PM – 9:30 PM</h4>
 		    <h4 th:if="${classDate == null}">Break</h4>
 		</li>
 	</ul>

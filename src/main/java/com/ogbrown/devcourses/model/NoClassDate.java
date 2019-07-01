@@ -1,26 +1,54 @@
-package com.ogbrown.devcourses.model;
+/*
+ * Copyright (c) 2017 - 2019 Oswald G. Brown, III
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+package com.ogbrown.devcourses.model;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.cache.annotation.Cacheable;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
+
 @Cacheable(value="deviceCache")
 @Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 @Entity
+@Table(name = "NoClassDate")
 public class NoClassDate implements Serializable {
-
-    public NoClassDate() {
-        // TODO Auto-generated constructor stub
-    }
     private static final long serialVersionUID = 1L;
+
     @Id
+    @Basic
     private LocalDate day;
     private String description;
+    private int version;
+
+    public NoClassDate() {
+    }
    
     public LocalDate getDay() {
         return day;
@@ -38,44 +66,27 @@ public class NoClassDate implements Serializable {
         this.description = description;
     }
 
-
-
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((day == null) ? 0 : day.hashCode());
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NoClassDate that = (NoClassDate) o;
+        return version == that.version &&
+                Objects.equals(day, that.day) &&
+                Objects.equals(description, that.description);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        NoClassDate other = (NoClassDate) obj;
-        if (day == null) {
-            if (other.day != null)
-                return false;
-        } else if (!day.equals(other.day))
-            return false;
-        if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(day, description, version);
     }
 
     @Override
     public String toString() {
-        return "NoClassDate [day=" + day + ", description=" + description + "]";
+        return "NoClassDate{" +
+                "day=" + day +
+                ", description='" + description + '\'' +
+                ", version=" + version +
+                '}';
     }
-
-   
-    
 }

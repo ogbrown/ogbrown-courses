@@ -5,10 +5,10 @@
 		<div class="container">
 			<div class="site-branding-text">
 				<h1 class="site-title">
-					<a href="https://web.sbogb.com/ogbrown-courses/" rel="home">O.G. Brown
-						Courses Live Demo</a>
+					<a href="https://www.ogbrown.com/java/demo-ogbrown-courses/" rel="home" target="_blank" >O.G. Brown
+						Courses Live Demo - Monolithic</a>
 				</h1>
-				<h2 class="site-description">Another Java Web App Demo</h2>
+				<h2 class="site-description">Another Java/Spring/Thymeleaf Web App Demo - Monolithic</h2>
 			</div>
 		</div>
 	</div>
@@ -39,7 +39,7 @@
 					<ul id="menu-main" class="nav navbar-nav">
 						<li id="menu-item-4836"
 							class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-4836"><a
-							title="Home" th:href="@{'/'}">Home</a></li>
+							title="Java Web Application Development | OGBrown.com Courses" th:href="@{'/'}">Home</a></li>
 						<li id="menu-item-1"
 							class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-91 dropdown"><a
 							title="Courses" href="#" data-target="#" data-toggle="dropdown"
@@ -60,7 +60,7 @@
 							th:title="${menuitem.title}"
 							th:href="@{'/' + ${menuitem.urlSlug} + '/'}" th:text="${menuitem.title}"><span th:class="${'menu-item-' + course.urlSlug}">Menu Item Title</span></a>
 						</li>
-						<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://github.com/ogbrown/ogbrown-courses/"><span class="menu-item-github">GitHub Project</span></a></li>
+						<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://github.com/ogbrown/ogbrown-courses/" target="_blank" ><span class="menu-item-github">GitHub Project</span></a></li>
 					</ul>
 				</div>
 			</div>

@@ -1,6 +1,30 @@
-package com.ogbrown.devcourses.web.dto;
+/*
+ * Copyright (c) 2017 - 2019 Oswald G. Brown, III
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.ogbrown.devcourses.model.dto;
 
 import com.ogbrown.utility.text.CsvTextUtility;
+
+import java.util.Objects;
 
 public class PageStringsDto {
 	private Long id;
@@ -176,106 +200,29 @@ public class PageStringsDto {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((contentHeader == null) ? 0 : contentHeader.hashCode());
-		result = prime * result + ((courseShortTitle == null) ? 0 : courseShortTitle.hashCode());
-		result = prime * result + ((courseUrlSlug == null) ? 0 : courseUrlSlug.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((leftSiblingLink == null) ? 0 : leftSiblingLink.hashCode());
-		result = prime * result + ((metaDescription == null) ? 0 : metaDescription.hashCode());
-		result = prime * result + ((metaKeywords == null) ? 0 : metaKeywords.hashCode());
-		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
-		result = prime * result + ((parentLink == null) ? 0 : parentLink.hashCode());
-		result = prime * result + ((published == null) ? 0 : published.hashCode());
-		result = prime * result + ((rightSiblingLink == null) ? 0 : rightSiblingLink.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((urlSlug == null) ? 0 : urlSlug.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		PageStringsDto that = (PageStringsDto) o;
+		return Objects.equals(id, that.id) &&
+				Objects.equals(title, that.title) &&
+				Objects.equals(urlSlug, that.urlSlug) &&
+				Objects.equals(metaDescription, that.metaDescription) &&
+				Objects.equals(metaKeywords, that.metaKeywords) &&
+				Objects.equals(contentHeader, that.contentHeader) &&
+				Objects.equals(content, that.content) &&
+				Objects.equals(notes, that.notes) &&
+				Objects.equals(published, that.published) &&
+				Objects.equals(parentLink, that.parentLink) &&
+				Objects.equals(leftSiblingLink, that.leftSiblingLink) &&
+				Objects.equals(rightSiblingLink, that.rightSiblingLink) &&
+				Objects.equals(courseShortTitle, that.courseShortTitle) &&
+				Objects.equals(courseUrlSlug, that.courseUrlSlug);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PageStringsDto other = (PageStringsDto) obj;
-		if (content == null) {
-			if (other.content != null)
-				return false;
-		} else if (!content.equals(other.content))
-			return false;
-		if (contentHeader == null) {
-			if (other.contentHeader != null)
-				return false;
-		} else if (!contentHeader.equals(other.contentHeader))
-			return false;
-		if (courseShortTitle == null) {
-			if (other.courseShortTitle != null)
-				return false;
-		} else if (!courseShortTitle.equals(other.courseShortTitle))
-			return false;
-		if (courseUrlSlug == null) {
-			if (other.courseUrlSlug != null)
-				return false;
-		} else if (!courseUrlSlug.equals(other.courseUrlSlug))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (leftSiblingLink == null) {
-			if (other.leftSiblingLink != null)
-				return false;
-		} else if (!leftSiblingLink.equals(other.leftSiblingLink))
-			return false;
-		if (metaDescription == null) {
-			if (other.metaDescription != null)
-				return false;
-		} else if (!metaDescription.equals(other.metaDescription))
-			return false;
-		if (metaKeywords == null) {
-			if (other.metaKeywords != null)
-				return false;
-		} else if (!metaKeywords.equals(other.metaKeywords))
-			return false;
-		if (notes == null) {
-			if (other.notes != null)
-				return false;
-		} else if (!notes.equals(other.notes))
-			return false;
-		if (parentLink == null) {
-			if (other.parentLink != null)
-				return false;
-		} else if (!parentLink.equals(other.parentLink))
-			return false;
-		if (published == null) {
-			if (other.published != null)
-				return false;
-		} else if (!published.equals(other.published))
-			return false;
-		if (rightSiblingLink == null) {
-			if (other.rightSiblingLink != null)
-				return false;
-		} else if (!rightSiblingLink.equals(other.rightSiblingLink))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		if (urlSlug == null) {
-			if (other.urlSlug != null)
-				return false;
-		} else if (!urlSlug.equals(other.urlSlug))
-			return false;
-		return true;
+	public int hashCode() {
+		return Objects.hash(id, title, urlSlug, metaDescription, metaKeywords, contentHeader, content, notes, published, parentLink, leftSiblingLink, rightSiblingLink, courseShortTitle, courseUrlSlug);
 	}
 
 	@Override

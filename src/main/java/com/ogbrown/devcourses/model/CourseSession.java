@@ -1,21 +1,34 @@
+/*
+ * Copyright (c) 2017 - 2019 Oswald G. Brown, III
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.ogbrown.devcourses.model;
-
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.cache.annotation.Cacheable;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
 @Cacheable(value="deviceCache")
 @Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
@@ -55,12 +68,6 @@ public class CourseSession {
 	}
 
 
-	public CourseSession(Course course, short sessionNumber, short pageOrder) {
-		this.course = course;
-		this.sessionNumber = sessionNumber;
-	}
-
-
 	public Course getCourse() {
 		return course;
 	}
@@ -92,51 +99,21 @@ public class CourseSession {
     }
 
 
-  
-	@Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((course == null) ? 0 : course.hashCode());
-        result = prime * result + ((lessonPlan == null) ? 0 : lessonPlan.hashCode());
-        result = prime * result + ((pages == null) ? 0 : pages.hashCode());
-        result = prime * result + ((sessionNumber == null) ? 0 : sessionNumber.hashCode());
-        return result;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CourseSession that = (CourseSession) o;
+        return Objects.equals(course, that.course) &&
+                Objects.equals(sessionNumber, that.sessionNumber) &&
+                Objects.equals(pages, that.pages) &&
+                Objects.equals(lessonPlan, that.lessonPlan);
     }
-
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        CourseSession other = (CourseSession) obj;
-        if (course == null) {
-            if (other.course != null)
-                return false;
-        } else if (!course.equals(other.course))
-            return false;
-        if (lessonPlan == null) {
-            if (other.lessonPlan != null)
-                return false;
-        } else if (!lessonPlan.equals(other.lessonPlan))
-            return false;
-        if (pages == null) {
-            if (other.pages != null)
-                return false;
-        } else if (!pages.equals(other.pages))
-            return false;
-        if (sessionNumber == null) {
-            if (other.sessionNumber != null)
-                return false;
-        } else if (!sessionNumber.equals(other.sessionNumber))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(course, sessionNumber, pages, lessonPlan);
     }
-
 
     @Override
 	public String toString() {

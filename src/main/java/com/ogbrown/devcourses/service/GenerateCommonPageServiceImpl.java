@@ -1,25 +1,33 @@
+/*
+ * Copyright (c) 2017 - 2019 Oswald G. Brown, III
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.ogbrown.devcourses.service;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
+import com.ogbrown.devcourses.model.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ogbrown.devcourses.model.Course;
-import com.ogbrown.devcourses.model.CoursePage;
-import com.ogbrown.devcourses.model.CourseSession;
-import com.ogbrown.devcourses.model.CourseSessionPage;
-import com.ogbrown.devcourses.model.Page;
+import java.math.BigInteger;
+import java.util.*;
 
 @Service( "generateCommonPageService" )
 public class GenerateCommonPageServiceImpl extends GeneratePageServiceImpl implements GenerateCommonPageService {
@@ -36,23 +44,10 @@ public class GenerateCommonPageServiceImpl extends GeneratePageServiceImpl imple
 	    Course course = courseRepository.findByUrlSlug(courseUrl);
         CoursePage coursePage = getCoursePage(courseUrl);
         CourseSessionPage courseSessionWithCommonMenuItemsPage = (CourseSessionPage) coursePage.getChildPages().get(courseSessionNum-1);
-//        List<BigInteger> pageIdsFound = courseSessionRepository.findPageIdByCourseAndSessionNumber(CoursePage.ALL_COURSES, (short)(courseSessionNum));
-//        List<Long> idsList = new ArrayList<Long>();
-//        for (BigInteger bigInt : pageIdsFound) idsList.add(bigInt.longValue());
-//        Sort sort = new Sort(Direction.ASC, "pageOrder");
-//        Iterable<Page> pagesFound = pageRepository.findByIdIn(idsList,sort);
-//        List<Page> pages = new ArrayList<Page>();
-//        for (Page pageFound : pagesFound) pages.add(pageFound);
 
-        
         Iterable<BigInteger> pageIds = courseSessionRepository.findPageIdByCourseAndSessionNumber(CoursePage.ALL_COURSES, (short)(courseSessionNum));
-        logger.trace("List of Page Ids: " + pageIds);
+        logger.trace("List of Page Ids: {}", pageIds);
 
-//        for (BigInteger bigInt : pageIdsDb) idsList.add(bigInt.longValue());
-//        Sort sort = new Sort(Direction.ASC, "pageOrder");
-//        Iterable<Page> pagesFound = pageRepository.findByIdInOrderByPageOrdAsc(idsList);
-//        List<Page> pages = new ArrayList<Page>();
-//        for (Page pageFound : pagesFound) pages.add(pageFound);        
         if (pageIds.iterator().hasNext() == true) {
             for (BigInteger bigInt : pageIds) idsList.add(bigInt.longValue());
         
@@ -70,8 +65,6 @@ public class GenerateCommonPageServiceImpl extends GeneratePageServiceImpl imple
             page.setUrlSlug(page.getUrlSlug().replace("common-", ""));
             page.setContentHeader(course.getShortTitle() + ": " + page.getContentHeader());
             page.setTitle(course.getShortTitle() + " " + page.getTitle());
-//            page.s(course.getUrlSlug() + "-" + page.getUrlSlug());
-//            page.setUrlSlug(course.getUrlSlug() + "-" + page.getUrlSlug());
         }
         for (int i = 0; i < pages.size(); i++) {
             Page page = pages.get(i);
