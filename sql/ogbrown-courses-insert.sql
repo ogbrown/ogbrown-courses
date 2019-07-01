@@ -1,7 +1,7 @@
 USE `ogbrown_courses_demo`;
 -- MySQL dump 10.13  Distrib 8.0.16, for macos10.14 (x86_64)
 --
--- Host: sbogb-rds-mysql8-e2c.crvmjxdhbtvr.us-east-2.rds.amazonaws.com    Database: ogbrown_courses_demo
+-- Host: localhost    Database: ogbrown_courses_demo
 -- ------------------------------------------------------
 -- Server version	8.0.15
 
