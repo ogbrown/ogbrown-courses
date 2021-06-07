@@ -19,7 +19,7 @@
 		<org.hibernate-version>5.3.10.Final</org.hibernate-version>
 		<org.aspectj-version>1.9.4</org.aspectj-version>
 		<org.slf4j-version>1.7.21</org.slf4j-version>
-		<logback.version>1.1.8</logback.version>
+		<logback.version>1.2.0</logback.version>
 		<jackson.version>2.9.9</jackson.version>
 		<junit.version>4.12</junit.version>
 		<thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
