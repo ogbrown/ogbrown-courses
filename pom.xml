@@ -14,7 +14,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<failOnMissingWebXml>false</failOnMissingWebXml>		
-		<org.springframework-version>4.3.24.RELEASE</org.springframework-version>
+		<org.springframework-version>5.3.18</org.springframework-version>
 		<org.springframework.data-jpa-version>1.11.22.RELEASE</org.springframework.data-jpa-version>
 		<org.hibernate-version>5.3.10.Final</org.hibernate-version>
 		<org.aspectj-version>1.9.4</org.aspectj-version>
