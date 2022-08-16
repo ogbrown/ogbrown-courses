@@ -36,7 +36,7 @@ into a RESTful Web Service and FrontEnd Web Application that consumes the data f
 
 # Live Demo
 
-To see a current version with the demo data visit <https://web.sbogb.com/ogbrown-courses/>
+To see a current version with the demo data visit [Offline at this time](https://web.sbogb.com/ogbrown-courses/)
 
 ## Local Demo
 In order to run the application you should configure your Database server correctly.
